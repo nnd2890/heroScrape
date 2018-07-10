@@ -1,0 +1,28 @@
+[
+    {
+        "airline": "United",
+        "stops": "Nonstop",
+        "arrival": "Miami, FL (MIA-Miami Intl.), Miami",
+        "plane_code": "319",
+        "departure": "Newark, NJ (EWR-Liberty Intl.), Newark",
+        "flight_duration": {
+            "minutes": 4,
+            "arrivalTimeOfDay": "AFTERNOON",
+            "departureTimeOfDay": "AFTERNOON",
+            "numOfDays": 0,
+            "duration": {
+                "zero": false,
+                "negative": false,
+                "units": [
+                    "SECONDS",
+                    "NANOS"
+                ],
+                "seconds": 11040,
+                "nano": 0
+            },
+            "hours": 3
+        },
+        "plane": "Airbus A319",
+        "ticket price": "244.20"
+    }
+]
