@@ -1,0 +1,151 @@
+bussiness_name,rank,review_count,categories,rating,address,reservation_available,accept_pickup,price_range,url
+The House,"1 
+
+
+        
+",4310,Asian Fusion,4.5,"1230 Grant Ave San Francisco, CA 94133",True,False,3,https://www.yelp.com/biz/the-house-san-francisco?osq=Restaurants
+Fog Harbor Fish House,"2 
+
+
+        
+",4308,"Seafood, Bars",4,"Pier 39 San Francisco, CA 94133",False,False,2,https://www.yelp.com/biz/fog-harbor-fish-house-san-francisco-2?osq=Restaurants
+Gary Danko,"3 
+
+
+        
+",4811,"American (New), French, Wine Bars",4.5,"800 N Point St San Francisco, CA 94109",False,False,4,https://www.yelp.com/biz/gary-danko-san-francisco?osq=Restaurants
+Brenda’s French Soul Food,"4 
+
+
+        
+",9336,"Breakfast & Brunch, French, Soul Food",4,"652 Polk St San Francisco, CA 94102",False,False,2,https://www.yelp.com/biz/brendas-french-soul-food-san-francisco?osq=Restaurants
+Marlowe,"5 
+
+
+        
+",2445,"American (New), Brasseries",4,"500 Brannan St San Francisco, CA 94107",False,False,2,https://www.yelp.com/biz/marlowe-san-francisco-2?osq=Restaurants
+Frances,"6 
+
+
+        
+",1403,"American (New), Desserts, Wine Bars",4.5,"3870 17th St San Francisco, CA 94114",False,False,3,https://www.yelp.com/biz/frances-san-francisco?osq=Restaurants
+Loló,"7 
+
+
+        
+",1831,Tapas/Small Plates,4,"974 Valencia St San Francisco, CA 94110",True,False,2,https://www.yelp.com/biz/lol%C3%B3-san-francisco-4?osq=Restaurants
+Kantine,"8 
+
+
+        
+",26,Scandinavian,4.5,"1906 Market St San Francisco, CA 94102",False,False,0,https://www.yelp.com/biz/kantine-san-francisco-2?osq=Restaurants
+Kokkari Estiatorio,"9 
+
+
+        
+",4071,"Greek, Mediterranean",4.5,"200 Jackson St San Francisco, CA 94111",False,False,3,https://www.yelp.com/biz/kokkari-estiatorio-san-francisco?osq=Restaurants
+Tropisueño,"10 
+
+
+        
+",3813,"Mexican, Cocktail Bars",4,"75 Yerba Buena Ln San Francisco, CA 94103",True,False,2,https://www.yelp.com/biz/tropisue%C3%B1o-san-francisco-3?osq=Restaurants
+Hops & Hominy,"11 
+
+
+        
+",1834,"Southern, American (Traditional), Bars",4,"1 Tillman Pl San Francisco, CA 94108",False,False,2,https://www.yelp.com/biz/hops-and-hominy-san-francisco?osq=Restaurants
+Tacorea,"12 
+
+
+        
+",1140,"Mexican, Korean, Latin American",4.5,"809 Bush St San Francisco, CA 94108",False,False,1,https://www.yelp.com/biz/tacorea-san-francisco?osq=Restaurants
+HRD,"13 
+
+
+        
+",2313,"Korean, Asian Fusion, Mexican",4,"521A 3rd St San Francisco, CA 94107",False,False,2,https://www.yelp.com/biz/hrd-san-francisco-4?osq=Restaurants
+Nopa,"14 
+
+
+        
+",4713,"American (New), Modern European",4,"560 Divisadero St San Francisco, CA 94117",False,False,3,https://www.yelp.com/biz/nopa-san-francisco?osq=Restaurants
+Hog Island Oyster Co,"15 
+
+
+        
+",5138,"Seafood, Seafood Markets, Live/Raw Food",4.5,Ferry Building Marketplace,False,False,2,https://www.yelp.com/biz/hog-island-oyster-co-san-francisco?osq=Restaurants
+Scoma’s Restaurant,"16 
+
+
+        
+",3116,"Seafood, Italian, Lounges",4,"1965 Al Scoma Way San Francisco, CA 94133",True,False,3,https://www.yelp.com/biz/scomas-restaurant-san-francisco-3?osq=Restaurants
+Marufuku Ramen,"17 
+
+
+        
+",1305,Ramen,4.5,Japan Center,False,False,2,https://www.yelp.com/biz/marufuku-ramen-san-francisco?osq=Restaurants
+Liholiho Yacht Club,"18 
+
+
+        
+",1798,"Bars, American (New), Seafood",4.5,"871 Sutter St San Francisco, CA 94109",True,False,3,https://www.yelp.com/biz/liholiho-yacht-club-san-francisco-2?osq=Restaurants
+Sotto Mare Oysteria & Seafood,"19 
+
+
+        
+",3108,"Seafood, Italian, Bars",4.5,"552 Green St San Francisco, CA 94133",False,False,2,https://www.yelp.com/biz/sotto-mare-oysteria-and-seafood-san-francisco?osq=Restaurants
+Wayfare Tavern,"20 
+
+
+        
+",3539,American (Traditional),4,"558 Sacramento St San Francisco, CA 94111",False,False,3,https://www.yelp.com/biz/wayfare-tavern-san-francisco-2?osq=Restaurants
+Barbacco,"21 
+
+
+        
+",1489,"Italian, Bars",4,"220 California St San Francisco, CA 94111",False,False,2,https://www.yelp.com/biz/barbacco-san-francisco?osq=Restaurants
+Hogwash,"22 
+
+
+        
+",864,"Gastropubs, Beer Bar",4.5,"582 Sutter St San Francisco, CA 94102",False,False,2,https://www.yelp.com/biz/hogwash-san-francisco?osq=Restaurants
+Foreign Cinema,"23 
+
+
+        
+",4412,"Breakfast & Brunch, Mediterranean, Cocktail Bars",4,"2534 Mission St San Francisco, CA 94110",False,False,3,https://www.yelp.com/biz/foreign-cinema-san-francisco?osq=Restaurants
+The Codmother Fish and Chips,"24 
+
+
+        
+",2613,"British, Fish & Chips, Seafood",4.5,"496 Beach St San Francisco, CA 94133",False,False,1,https://www.yelp.com/biz/the-codmother-fish-and-chips-san-francisco?osq=Restaurants
+La Fusión,"25 
+
+
+        
+",1056,"Latin American, Desserts, Breakfast & Brunch",4.5,"475 Pine St San Francisco, CA 94104",False,False,2,https://www.yelp.com/biz/la-fusi%C3%B3n-san-francisco-2?osq=Restaurants
+The Front Porch,"26 
+
+
+        
+",2497,"Southern, Cajun/Creole",4,"65A 29th St San Francisco, CA 94110",True,True,2,https://www.yelp.com/biz/the-front-porch-san-francisco?osq=Restaurants
+Zero Zero,"27 
+
+
+        
+",2958,"Pizza, Italian, Cocktail Bars",4,"826 Folsom St San Francisco, CA 94107",True,False,2,https://www.yelp.com/biz/zero-zero-san-francisco?osq=Restaurants
+San Tung,"28 
+
+
+        
+",6077,"Chinese, Chicken Wings, Noodles",4,"1031 Irving St San Francisco, CA 94122",False,False,2,https://www.yelp.com/biz/san-tung-san-francisco-2?osq=Restaurants
+Zazie,"29 
+
+
+        
+",3943,"Breakfast & Brunch, French",4,"941 Cole St San Francisco, CA 94117",False,False,2,https://www.yelp.com/biz/zazie-san-francisco?osq=Restaurants
+Coqueta,"30 
+
+
+        
+",1730,"Spanish, Tapas/Small Plates",4,"The Embarcadero San Francisco, CA 94105",False,False,3,https://www.yelp.com/biz/coqueta-san-francisco?osq=Restaurants
