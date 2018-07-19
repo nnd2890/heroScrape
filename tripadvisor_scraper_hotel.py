@@ -50,11 +50,54 @@ def parse(url):
    
     XPATH_AMENITIES = '//div[contains(text(), "Amenities")]/following-sibling::div[1]//div[@class!="textitem"]'
     amenities = parser.xpath(XPATH_AMENITIES)
+    amenity_dict = OrderedDict()
+    for amenity in amenities:
+        XPATH_AMENITY_KEY = './/div[contains(@class, "sub_title")]//text()'
+        XPATH_AMENITY_VALUE = './/div[contains(@class, "sub_content")]//text()'
 
-    XPATH_HIGHLIGHTS = ''
-    XPATH_OFFICAL_DESCRIPTION = ''
-    XPATH_ADDITIONAL_INFO = ''
-    XPATH_FULL_ADDRESS_JSON = ''
+        raw_amenity_key = parser.xpath(XPATH_AMENITY_KEY)
+        raw_amenity_value = parser.xpath(XPATH_AMENITY_VALUE)
+        if raw_amenity_key and raw_amenity_value:
+            amenity_key = get_string(raw_amenity_key)
+            amenity_value = get_string(raw_amenity_value)
+            amenity_dict.update({amenity_key:amenity_value})
+        
+
+    XPATH_HIGHLIGHTS = '//div[contains(@class, "highlightedAmenity")]//text()'
+    raw_highlights = parser.xpath(XPATH_HIGHLIGHTS)
+    cleaned_highlights = filter(lambda x:x != '\n', raw_highlights)
+    highlights = get_string(cleaned_highlights)
+
+    
+
+    XPATH_ADDITIONAL_INFO = '//div[contains(text(), "Details")]/following-sibling::div[@class="selection_content"]/div'
+    raw_additional_info = parser.xpath(XPATH_ADDITIONAL_INFO)
+    additional_info_dict = OrderedDict()
+    for info in raw_additional_info:
+        XPATH_INFO_TEXT = "./text()"
+        if info.xpath(XPATH_INFO_TEXT):
+            XPATH_INFO_KEY = ".//text()"
+            XPATH_INFO_VALUE = "./following-sibling::div[1]//text()"
+
+            raw_info_key = info.xpath(XPATH_INFO_KEY)
+            raw_info_value = info.xpath(XPATH_INFO_VALUE)
+            if raw_info_value and raw_info_key:
+                # cleaning
+                raw_info_value = ''.join(raw_info_value).replace("#", ", #").lstrip(", ")
+                if raw_info_key[0] == "Hotel class":
+                    continue
+                additional_info_dict.update({raw_info_key[0]: raw_info_value})
+
+    XPATH_FULL_ADDRESS_JSON = '//script[@type="application/ld+json"]//text()'
+    raw_full_address_json = parser.xpath(XPATH_FULL_ADDRESS_JSON)
+    if raw_full_address_json:
+        try:
+            parsed_address_info = json.loads(raw_full_address_json[0])
+            zipcode = parsed_address_info['address'].get('postalCode')
+            country = parsed_address_info['address'].get('addressCountry', {}).get('name')
+
+        except Exception as e:
+            raise e
 
 
 
@@ -68,7 +111,7 @@ def parse(url):
 
 
 
-    print (amenities)
+    print (parsed_address_info)
     return ''
 
 def get_string(arr):
