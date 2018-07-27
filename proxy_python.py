@@ -1,7 +1,6 @@
 import requests
 from lxml.html import fromstring
-from itertools import cycle
-import traceback
+import random
 
 def get_proxies():
     url = 'https://free-proxy-list.net/'
@@ -14,19 +13,25 @@ def get_proxies():
             port = i.xpath('td[2]/text()')[0]
             proxy = ":".join([ip, port])
             proxies.add(proxy)
+
+    proxy = random.sample(proxies, 1)[0]
+    proxy = '167.99.157.10:3128'
+    proxies = {"http": "http://" + proxy, "https": "http://" + proxy}
     return proxies
 
 proxies = get_proxies()
-proxy_pool = cycle(proxies)
-
 url = 'https://httpbin.org/ip'
-for i in range(1,len(proxies)):
-    proxy = next(proxy_pool)
-    print("Request #%d"%i)
-    proxies = {"http": "http://" + proxy, "https": "http://" + proxy}
-    # print(proxies)
-    try:
-        response = requests.get(url, proxies=proxies)
-        print(response.json())
-    except:
-        print("Skipping. Connection error")
+response = requests.get(url, proxies=proxies)
+print(response.json())
+
+# url = 'https://httpbin.org/ip'
+# for i in range(1,len(proxies)):
+#     proxy = next(proxy_pool)
+#     print("Request #%d"%i)
+#     proxies = {"http": "http://" + proxy, "https": "http://" + proxy}
+#     # print(proxies)
+#     try:
+#         response = requests.get(url, proxies=proxies)
+#         print(response.json())
+#     except:
+#         print("Skipping. Connection error")

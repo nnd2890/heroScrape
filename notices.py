@@ -44,4 +44,4 @@ def get_number(arr):
         number = re.findall(r'\d+[,.]?\d+', str)[0].replace(',','')
         return number
     else:
-        return None
+        return
