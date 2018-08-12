@@ -6,6 +6,7 @@ import re
 import sys, os
 import json
 import time
+from mysql_database import MysqlDatabase
 
 def parse_listing(url):
     headers = {
@@ -14,10 +15,9 @@ def parse_listing(url):
 
     proxy = '43.249.143.89:31191'
     proxies = {"http": "http://" + proxy, "https": "http://" + proxy}
-
     scraped_results = []
     try:
-        response = requests.get(url, verify=False, headers = headers, proxies=proxies)
+        response = requests.get(url, verify=False, headers = headers)
         print("parsing page")
         print(url)
         if response.status_code == 200:
@@ -54,7 +54,7 @@ def parse_listing(url):
                     'Commodity':Commodity,
                     'Price':Price,
                     'Chg':Chg,
-                    '%Chg':percentChg,
+                    'perChg':percentChg,
                     'Open':Open,
                     'High':High,
                     'Low':Low,
@@ -63,7 +63,8 @@ def parse_listing(url):
                     'NEG':NEG
                 }
 
-                scraped_results.append(business_details)
+                if (POS >= 1 or NEG <= -1):
+                    scraped_results.append(business_details)
             # print(scraped_results)
             return  scraped_results
         elif response.status_code == 404:
@@ -84,26 +85,14 @@ def get_string(parser, XPATH):
     str = ''.join(arr).strip() if arr else None
     return str
 
-def get_number(arr):
-    if arr:
-        str = get_string(arr)
-        number = re.findall(r'\d+[,.]?\d+', str)[0].replace(',','')
-        return number
-    else:
-        return None
-
 def writeCsvFile(name_file, fieldnames, scraped_data):
-    print("Writing scraped data to %s.csv" % name_file)
     with open('%s.csv' % name_file, 'wb') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
         writer.writeheader()
         for datas in scraped_data:
             if datas:
                 for data in datas:
-                    POS = data['POS']
-                    NEG = data['NEG']
-                    if (POS >= 1 or NEG <= -1):
-                        writer.writerow(data)
+                    writer.writerow(data)
     print("Writing %s.csv Finished!" % name_file)
 
 def notify(notification_title, notification_message):
@@ -125,14 +114,12 @@ if __name__=="__main__":
     url_list = []
     url_list.append(url1)
     url_list.append(url2)
-    i = 1
+
+    live_database = MysqlDatabase()
+
     while True:
-        # Code executed here
-        # Make the Pool of workers
         pool = ThreadPool(10)
-        # Open the urls in their own threads and return the results
         scraped_data = pool.map(parse_listing, url_list)
-        # Close the pool and wait for the work to finish
         pool.terminate()
         pool.join()
 
@@ -141,7 +128,7 @@ if __name__=="__main__":
             'Commodity',
             'Price',
             'Chg',
-            '%Chg',
+            'perChg',
             'Open',
             'High',
             'Low',
@@ -149,17 +136,16 @@ if __name__=="__main__":
             'POS',
             'NEG'
         ]
-        body = "Commodity, Price, Chg, %Chg, Open, High, Low, Time, POS, NEG\n"
+        # body = "Commodity, Price, Chg, %Chg, Open, High, Low, Time, POS, NEG\n"
+        body = ""
         for datas in scraped_data:
             if datas:
                 for data in datas:
-                    POS = data['POS']
-                    NEG = data['NEG']
-                    if (POS >= 1 or NEG <= -1):
+                    if data:
                         Commodity = data['Commodity']
                         Price = data['Price']
                         Chg = data['Chg']
-                        percentChg = data['%Chg']
+                        percentChg = data['perChg']
                         Open = data['Open']
                         High = data['High']
                         Low = data['Low']
@@ -167,21 +153,49 @@ if __name__=="__main__":
                         POS = data['POS']
                         NEG = data['NEG']
 
-                        body += Commodity + \
-                                ", " + Price + \
-                                ", " + Chg + \
-                                ", " + percentChg + \
-                                ", " + Open + \
-                                ", " + High + \
-                                ", " + Low + \
-                                ", " + Time + \
-                                ", " + str(POS) + \
-                                ", " + str(NEG) + "\n"
+                        # body += Commodity + \
+                        #         ", " + Price + \
+                        #         ", " + Chg + \
+                        #         ", " + percentChg + \
+                        #         ", " + Open + \
+                        #         ", " + High + \
+                        #         ", " + Low + \
+                        #         ", " + Time + \
+                        #         ", " + str(POS) + \
+                        #         ", " + str(NEG) + "\n"
 
-        print(body)
+                        table = "live"
+                        col = "Commodity"
 
-        # writeCsvFile(name_file, fieldnames, scraped_data)
-        # break
-        title = "MCX-NCDEX rates"
-        notify(title, body)
+                        # check record is existed on database
+                        if live_database.row_existed(table, col, Commodity):
+                            record = live_database.select_field_where(table, col, Commodity)
+                            record_len = len(record)
+                            record_POS = record[record_len-2]
+                            record_NEG = record[record_len-1]
+                            record_id = record[0]
+
+                            if (record_POS != POS) or (record_NEG != NEG):
+                                body += Commodity + \
+                                        ", " + Price + \
+                                        ", " + Chg + \
+                                        ", " + percentChg + \
+                                        ", " + Open + \
+                                        ", " + High + \
+                                        ", " + Low + \
+                                        ", " + Time + \
+                                        ", " + str(POS) + \
+                                        ", " + str(NEG) + "\n"
+                                live_database.update_row(table, data, record_id)
+                        else:
+                            live_database.insertRow(table, data)
+        if body:
+            body = "Commodity, Price, Chg, %Chg, Open, High, Low, Time, POS, NEG\n" + body
+            print(body)
+            # writeCsvFile(name_file, fieldnames, scraped_data)
+            title = "MCX-NCDEX rates"
+            notify(title, body)
+        else:
+            print("dont get new content")
         time.sleep(60)
+
